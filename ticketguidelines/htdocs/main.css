@@ -4,3 +4,7 @@ div.ticket-guidelines {
   margin: 1em 0;
   padding: 0 1em;
 }
+
+.ticket-guidelines-default-text-inserted {
+	background-color: #ffddcc;
+}
