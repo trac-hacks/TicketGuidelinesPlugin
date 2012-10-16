@@ -43,7 +43,7 @@
 ################################################################################
 #
 # $Revision: 302 $
-# $Date: 2009-09-04 09:37:44 -0400 (Fri, 04 Sep 2009) $
+# $Date: 2009-09-04 13:37:44 +0000 (Fri, 04 Sep 2009) $
 # $URL: https://svn.mayastudios.de/mtpp/repos/plugins/ticketguidelines/trunk/ticketguidelines/web_ui.py $
 #
 ################################################################################
@@ -187,6 +187,6 @@ class TicketCommentGuidelinesBox(Component):
       return stream
       
     if req.path_info.startswith('/ticket/'):
-      stream = stream | Transformer('//form[@id="propertyform"]/h3[1]').after(_get_wiki_html(self.env, data, False))
+      stream = stream | Transformer('//form[@id="propertyform"]').before(_get_wiki_html(self.env, data, False))
       
     return stream
