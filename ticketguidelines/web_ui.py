@@ -125,7 +125,6 @@ class TicketGuidelinesContentProvider(Component):
 
     if template and (req.path_info.startswith('/ticket/') or req.path_info.startswith('/newticket')):
       add_stylesheet(req, 'ticketguidelinesplugin/main.css')
-      add_script(req, 'ticketguidelinesplugin/script.js')
 
     return (template, data, content_type)
 
