@@ -1,10 +1,10 @@
 div.ticket-guidelines {
-  background-color: #FFDDCC;
-  border: 2px solid #DD0000;
-  margin: 1em 0;
-  padding: 0 1em;
+ background-color: #FFDDCC;
+ border: 2px solid #DD0000;
+ margin: 1em 0;
+ padding: 0 1em;
 }
 
 .ticket-guidelines-default-text-inserted {
-	background-color: #ffddcc;
+ background-color: #ffddcc;
 }
