@@ -17,7 +17,7 @@ setup(
     name=PACKAGE,
     version=VERSION,
     author='Sebastian Krysmanski',
-    url='https://github.com/trac-hacks/TicketGuidelinesPlugin',
+    url='https://trac-hacks.org/wiki/TicketGuidelinesPlugin',
     description="Adds your ticket guidelines to the ticket view. The "
                 "guidelines are specified in the wiki pages "
                 "'TicketGuidelines/NewShort' and "
