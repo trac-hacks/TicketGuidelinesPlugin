@@ -8,9 +8,9 @@
 # you should have received as part of this distribution.
 #
 
-from genshi.builder import tag
 from genshi.filters.transform import Transformer
 from trac.core import *
+from trac.util.html import html
 from trac.web.api import IRequestFilter, ITemplateStreamFilter
 from trac.web.chrome import ITemplateProvider, add_stylesheet
 from trac.wiki.formatter import format_to_html
@@ -28,18 +28,18 @@ def _get_wiki_html(env, data, is_new_ticket):
         text = page.text
     else:
         if is_new_ticket:
-            text = 'No ticket guidelines for creating a new ticket have ' \
-                   'been specified. Please create [wiki:%s this wiki page] ' \
-                   'to specify these guidelines.' \
+            text = "No ticket guidelines for creating a new ticket have " \
+                   "been specified. Please create [wiki:%s this wiki page] " \
+                   "to specify these guidelines." \
                    % NEW_TICKET_PAGE_NAME
         else:
-            text = 'No ticket guidelines for modifying a ticket have been ' \
-                   'specified. Please create [wiki:%s this wiki page] to ' \
-                   'specify these guidelines.' \
+            text = "No ticket guidelines for modifying a ticket have been " \
+                   "specified. Please create [wiki:%s this wiki page] to " \
+                   "specify these guidelines." \
                    % MODIFY_TICKET_PAGE_NAME
 
-    return tag.div(format_to_html(env, data['context'], text),
-                   class_='ticket-guidelines')
+    return html.div(format_to_html(env, data['context'], text),
+                    class_='ticket-guidelines')
 
 
 class TicketGuidelinesContentProvider(Component):
@@ -54,15 +54,15 @@ class TicketGuidelinesContentProvider(Component):
 
     def get_htdocs_dirs(self):
         from pkg_resources import resource_filename
-        return [
-            ('ticketguidelinesplugin', resource_filename(__name__, 'htdocs'))]
+        return [('ticketguidelinesplugin',
+                 resource_filename(__name__, 'htdocs'))]
 
     # IRequestFilter methods
 
     def post_process_request(self, req, template, data, content_type):
         if template and (
-                req.path_info.startswith('/ticket/') or
-                req.path_info.startswith('/newticket')):
+                    req.path_info.startswith('/ticket/') or
+                    req.path_info.startswith('/newticket')):
             add_stylesheet(req, 'ticketguidelinesplugin/main.css')
 
         return template, data, content_type
@@ -85,8 +85,9 @@ class NewTicketGuidelinesBox(Component):
             return stream
 
         if req.path_info.startswith('/newticket'):
-            stream = stream | Transformer('//form[@id="propertyform"]').before(
-                _get_wiki_html(self.env, data, True))
+            stream = stream | Transformer(
+                '//form[@id="propertyform"]')\
+                .before(_get_wiki_html(self.env, data, True))
 
         return stream
 
@@ -105,7 +106,8 @@ class TicketCommentGuidelinesBox(Component):
             return stream
 
         if req.path_info.startswith('/ticket/'):
-            stream = stream | Transformer('//form[@id="propertyform"]').before(
-                _get_wiki_html(self.env, data, False))
+            stream = stream | Transformer(
+                '//form[@id="propertyform"]')\
+                .before(_get_wiki_html(self.env, data, False))
 
         return stream

@@ -11,7 +11,7 @@
 from setuptools import setup
 
 PACKAGE = 'TicketGuidelinesPlugin'
-VERSION = '0.3'
+VERSION = '1.0.0'
 
 setup(
     name=PACKAGE,
