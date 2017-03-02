@@ -10,7 +10,7 @@
 
 from setuptools import setup
 
-PACKAGE = 'TicketGuidelinesPlugin'
+PACKAGE = 'TracTicketGuidelines'
 VERSION = '1.0.0'
 
 setup(
